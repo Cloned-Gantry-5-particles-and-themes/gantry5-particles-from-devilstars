@@ -1,0 +1,51 @@
+{% extends '@nucleus/partials/particle.html.twig' %}
+
+{% set cellItems %}
+    {% for item in particle.items %}
+        <img src="{{ url(item.image) }}" alt="{% if item.alt %}{{ item.alt|e }}{% endif %}">
+    {% endfor %}
+{% endset %}
+
+{% block particle %}
+  {% assets in 'head' with { priority: 0 } %}
+      <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/flickity/1.1.2/flickity.min.css" type="text/css"/>
+      <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/flickity/1.1.2/flickity.pkgd.min.js"></script>
+  {% endassets -%}
+  {% styles with { priority: -10 } %}
+  <style>
+      .gallery {
+        height: {{ particle.height|e }}px;
+      }
+      .gallery img {
+        height: {{ particle.height|e }}px;
+      }
+      .flickity-page-dots {
+        bottom: 10px;
+      }
+  </style>
+  {% endstyles -%}
+
+  <div class="gallery js-flickity" data-flickity-options='{
+    "accessibility": {{ particle.accessibility }} ,
+    "autoPlay": {{ particle.autoPlay }} ,
+    "cellAlign": "{{ particle.cellAlign }}" ,
+    "contain": {{ particle.contain }} ,
+    "draggable": {{ particle.draggable }} ,
+    "freeScroll": {{ particle.freeScroll }} ,
+    "friction": {{ particle.friction }} ,
+    "initialIndex": {{ particle.initialIndex }} ,
+    "lazyLoad": {{ particle.lazyLoad }} ,
+    "prevNextButtons": {{ particle.prevNextButtons }} ,
+    "pageDots": {{ particle.pageDots }} ,
+    "rightToLeft": {{ particle.rightToLeft }} ,
+    "wrapAround": {{ particle.wrapAround }} ,
+
+    "watchCSS": false ,
+    "imagesLoaded": true ,
+    "resize": true ,
+    "setGallerySize": false }'>
+
+      {{ cellItems }}
+
+    </div>
+{% endblock %}

@@ -1,0 +1,105 @@
+name: UIKit Switcher
+description: Dynamically transition through different content panes.
+type: particle
+icon: fa-file-code-o
+
+form:
+  fields:
+    enabled:
+      type: input.checkbox
+      label: Enabled
+      description: Globally enable Switcher particle.
+      default: true
+
+    layout:
+      type: select.select
+      label: Layout
+      description: Select the tabs position.
+      placeholder: 'Select...'
+      default: top
+      options:
+        top: Top
+        bottom: Bottom
+        left: Left
+        right: Right
+
+    tabswidth:
+      type: select.select
+      label: Tabs Width
+      description: Select the tabs width ('Left' and 'Right' layout ONLY).
+      placeholder: 'Select...'
+      default: 2
+      options:
+        2: 50%
+        3: 33.3%
+        4: 25%
+        5: 20%
+        6: 16.6%
+
+    tabbtn:
+      type: select.select
+      label: Switcher with buttons
+      description: The switcher can also be applied to buttons or button groups. ('TOP' and 'BOTTOM' layout ONLY) 
+      placeholder: 'Select...'
+      default: none
+      options:
+        none: none
+        button: Buttons
+        buttongroup: Button group
+
+    animation:
+      type: select.select
+      label: Animation
+      description: Select the tabs animation.
+      placeholder: 'Select...'
+      default: none
+      options:
+        none: None
+        fade: Fade
+        scale: Scale
+        slide-top: Slide Top
+        slide-bottom: Slide Bottom
+        slide-left: Slide Left
+        slide-right: Slide Right
+        slide-horizontal: Slide Horizontal
+        slide-vertical: Slide Vertical
+
+    css.class:
+      type: input.selectize
+      label: CSS Classes
+      description: CSS class name for the particle.
+      default: 
+
+    extra:
+      type: collection.keyvalue
+      label: Tag Attributes
+      description: Extra Tag attributes.
+      key_placeholder: Key (data-*, style, ...)
+      value_placeholder: Value
+      exclude: ['id', 'class']
+
+    items:
+      type: collection.list
+      array: true
+      label: Tab Items
+      description: Create each tab to display.
+      value: name
+      ajax: true
+
+      fields:
+
+        .icon:
+          type: input.icon
+          label: Title Icon
+
+        .title:
+          type: input.text
+          label: Title
+
+        .description:
+          type: textarea.textarea
+          label: Description
+
+        .class:
+          type: input.selectize
+          label: CSS Class

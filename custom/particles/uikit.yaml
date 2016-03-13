@@ -1,0 +1,35 @@
+name: UIkit
+description: Loads UIKit framework for the page.
+type: atom
+icon: fa-file-code-o
+
+form:
+  fields:
+    enabled:
+      type: input.checkbox
+      label: Enabled
+      description: Globally enable UIkit atom.
+      default: true
+
+    _info:
+      type: separator.note
+      class: alert alert-info
+      content: <strong>TIP</strong>: Only enable UIKit framework if you need it. Check the latest version of UIKit here https://cdnjs.com/libraries/uikit
+
+    uikit:
+      type: container.set
+      label: UIkit
+      fields:
+        .css:
+          type: enable.enable
+          label: UIKit CSS
+          default: 0
+        .js:
+          type: enable.enable
+          label: UIKit JS
+          default: 0
+        .version:
+          type: input.text
+          label: UIKit Version
+          description: Input UIKit version. 2.25.0 is recommended
+          default: 2.25.0

@@ -1,0 +1,9 @@
+{% assets in 'head' with { priority: 0 } %}
+	{% if particle.uikit.css %}
+		<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/uikit/{{ particle.uikit.version|e }}/css/uikit.min.css" />
+	{% endif %}
+
+	{% if particle.uikit.js %}
+		<script src="//cdnjs.cloudflare.com/ajax/libs/uikit/{{ particle.uikit.version|e }}/js/uikit.min.js"></script>
+	{% endif %}
+{% endassets -%}

@@ -1,0 +1,172 @@
+name: Flickity
+description: Touch, responsive, flickable galleries
+type: particle
+icon: fa-file-code-o
+
+form:
+  fields:
+    enabled:
+      type: input.checkbox
+      label: Enabled
+      description: Globally enable Flickity particle.
+      default: true
+
+    height:
+      type: input.number
+      label: Height *
+      description: Height of the gallery in pixels. MUST BE A NUMBER AND NOT EMPTY
+      selectize:
+        allowEmptyOption: false
+      default: 200
+
+    accessibility:
+      type: select.select
+      label: Accessibility
+      description: Enable keyboard navigation, pressing left & right keys
+      placeholder: 'Select...'
+      default: 'true'
+      options:
+        'false': Disable
+        'true': Enable
+
+    autoPlay:
+      type: select.select
+      label: Autoplay
+      description: Advances to the next cell
+      placeholder: 'Select...'
+      default: 'true'
+      options:
+        'false': Disable
+        'true': Enable
+        500: 0.5s
+        1000: 1s
+        2000: 2s
+        3000: 3s
+        4000: 4s
+        5000: 5s
+        10000: 10s
+
+    cellAlign:
+      type: select.select
+      label: Cell Align
+      description: Alignment of cells, 'center', 'left', or 'right'
+      placeholder: 'Select...'
+      default: center
+      options:
+        center: Center
+        right: Right
+        left: Left
+
+    contain:
+      type: select.select
+      label: Contain
+      description: Will contain cells to container so no excess scroll at beginning or end. Has no effect if wrapAround is enabled.
+      placeholder: 'Select...'
+      default: 'false'
+      options:
+        'false': Disable
+        'true': Enable
+
+    draggable:
+      type: select.select
+      label: Draggable
+      description: Enables dragging & flicking
+      placeholder: 'Select...'
+      default: 'true'
+      options:
+        'false': Disable
+        'true': Enable
+
+    freeScroll:
+      type: select.select
+      label: Free Scroll
+      description: Enables content to be freely scrolled and flicked without aligning cells
+      placeholder: 'Select...'
+      default: 'false'
+      options:
+        'false': Disable
+        'true': Enable
+
+    friction:
+      type: input.number
+      label: Friction *
+      description: Smaller number = easier to flick farther. MUST BE A NUMBER AND NOT EMPTY
+      selectize:
+        allowEmptyOption: false
+      default: 0.20
+
+    initialIndex:
+      type: input.number
+      label: Initial Index *
+      description: Zero-based index of the initial selected cell. MUST BE A NUMBER AND NOT EMPTY
+      selectize:
+        allowEmptyOption: false
+      default: 0
+
+    lazyLoad:
+      type: select.select
+      label: Lazy Load
+      description: Enable lazy-loading images
+      placeholder: 'Select...'
+      default: 'true'
+      options:
+        'false': Disable
+        'true': Enable
+
+    prevNextButtons:
+      type: select.select
+      label: Prev/Next Buttons
+      description: Creates and enables buttons to click to previous & next cells
+      placeholder: 'Select...'
+      default: 'true'
+      options:
+        'false': Disable
+        'true': Enable
+
+    pageDots:
+      type: select.select
+      label: Page Dots
+      description: Create and enable page dots
+      placeholder: 'Select...'
+      default: 'true'
+      options:
+        'false': Disable
+        'true': Enable
+
+    rightToLeft:
+      type: select.select
+      label: Right To Left
+      description: Enables right-to-left layout
+      placeholder: 'Select...'
+      default: 'false'
+      options:
+        'false': Disable
+        'true': Enable
+
+    wrapAround:
+      type: select.select
+      label: Infinite Scrolling
+      description: At end of cells, wraps-around to first for infinite scrolling
+      placeholder: 'Select...'
+      default: 'true'
+      options:
+        'false': Disable
+        'true': Enable
+
+    items:
+      type: collection.list
+      array: true
+      label: Cell items
+      description: Create each cell to display.
+      value: name
+      ajax: true
+
+      fields:
+
+        .image:
+          type: input.imagepicker
+          label: Image
+
+        .alt:
+          type: input.text
+          label: Alt text

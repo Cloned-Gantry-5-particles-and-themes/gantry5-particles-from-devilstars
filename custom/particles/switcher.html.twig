@@ -1,0 +1,75 @@
+{% extends '@nucleus/partials/particle.html.twig' %}
+
+{% set particle_extra = '' %}
+
+{% if particle.extra %}
+    {% for attributes in particle.extra %}
+        {% for key, value in attributes %}
+            {% set particle_extra = particle_extra ~ ' ' ~ key|e ~ '="' ~ value|e('html_attr') ~ '"' %}
+        {% endfor %}
+    {% endfor %}
+{% endif %}
+
+{% set tabsnav %}
+	{% if (particle.tabbtn|default('none') == 'button') or (particle.tabbtn|default('none') == 'buttongroup') %}
+		{% for item in particle.items %}    
+	        {% if item.title %}<button class="uk-button" type="button">
+	            {% if item.icon %}<span class="g-title-icon {{ item.icon|e }}"></span>{% endif %} {{ item.title|e }}
+	        </button>{% endif %}
+		{% endfor %}
+	{% else %}
+	    {% for item in particle.items %}    
+	        {% if item.title %}<li class="g-tab-nav{% if item.class %} {{ item.class|e }}{% endif %}">
+	            <a href="">{% if item.icon %}<span class="g-title-icon {{ item.icon|e }}"></span>{% endif %} {{ item.title|e }}</a>
+	        </li>{% endif %}
+		{% endfor %}
+	{% endif %}
+{% endset %}
+
+{% set tabscontent %}
+    {% for item in particle.items %} 
+        {% if item.description %}<li class="g-tab-content{% if item.class %} {{ item.class|e }}{% endif %}">
+            {{ item.description|raw }}
+        </li>{% endif %}
+    {% endfor %}
+{% endset %}
+
+{% set tabsnavcontainer %}
+	{% if (particle.tabbtn|default('none') == 'button') or (particle.tabbtn|default('none') == 'buttongroup') %}<div {% if particle.tabbtn|default('none') == 'buttongroup' %}class="uk-button-group"{% endif %} data-uk-switcher="{connect:'#tabs-content', animation: '{{ particle.animation|default('none')|e }}'}">
+		{{ tabsnav }}
+	</div>
+	{% else %}
+	    {% if (particle.layout|default('top') == 'left') or (particle.layout|default('top') == 'right') %}<div class="uk-width-medium-1-{{ particle.tabswidth|default('2')|e }}{% if particle.layout|default('top') == 'right' %} uk-push-{{ (particle.tabswidth|default('2') - 1)|e }}-{{ particle.tabswidth|default('2')|e }}{% endif %}">{% endif %}
+	        <ul class="uk-tab{% if particle.layout|default('top') == 'top' %} uk-tab-top{% endif %}{% if particle.layout|default('top') == 'bottom' %} uk-tab-bottom{% endif %}{% if particle.layout|default('top') == 'left' %} uk-tab-left{% endif %}{% if particle.layout|default('top') == 'right' %} uk-tab-right{% endif %}" data-uk-tab="{connect:'#tabs-content', animation: '{{ particle.animation|default('none')|e }}'}">
+	            {{ tabsnav }}
+	        </ul>
+	    {% if (particle.layout|default('top') == 'left') or (particle.layout|default('top') == 'right') %}</div>{% endif %}
+	{% endif %}
+{% endset %}
+
+{% set tabscontentcontainer %}
+    {% if (particle.layout|default('top') == 'left') or (particle.layout|default('top') == 'right') %}<div class="uk-width-medium-{{ (particle.tabswidth|default('2') - 1)|e }}-{{ particle.tabswidth|default('2')|e }}{% if particle.layout|default('top') == 'right' %} uk-pull-1-{{ particle.tabswidth|default('2')|e }}{% endif %}">{% endif %}
+        <ul id="tabs-content" class="uk-switcher uk-margin {{ particle.layout|e }}">
+            {{ tabscontent }}
+        </ul>
+    {% if (particle.layout|default('top') == 'left') or (particle.layout|default('top') == 'right') %}</div>{% endif %}
+{% endset %}
+
+{% block particle %}
+    {% assets in 'footer' with { priority: 10 } %}
+        <script type="text/javascript" src="{{ url('//cdnjs.cloudflare.com/ajax/libs/uikit/2.25.0/js/core/switcher.min.js') }}"></script>
+    {% endassets -%}
+    {# End loading assets #}
+    
+    <div class="g-tabs{% if particle.css.class %} {{ particle.css.class|e }}{% endif %}" {% if particle.extra %}{{ particle_extra|raw }}{% endif %}>
+        {% if (particle.layout|default('top') == 'left') or (particle.layout|default('top') == 'right') %}<div class="uk-grid">{% endif %}
+            {% if particle.layout|default('top') == 'bottom' %}
+                {{ tabscontentcontainer }}
+                {{ tabsnavcontainer }}
+            {% else %}
+                {{ tabsnavcontainer }}
+                {{ tabscontentcontainer }}
+            {% endif %}
+        {% if (particle.layout|default('top') == 'left') or (particle.layout|default('top') == 'right') %}</div>{% endif %}
+    </div>
+{% endblock %}
